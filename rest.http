@@ -1,0 +1,12 @@
+GET http://localhost:8080/taylor
+Content-Type: application/json
+{
+    "id": 1,
+    "name": "Drew Hardwick",
+    "date": "2006-2007",
+    "info": "She was inspired to write Teardrops on My Guitar about her experience with him",
+    "image": "https://ilarge.lisimg.com/image/7764313/740full-drew-chadwick-photo.jpg"
+  }
+###
+GET http://localhost:8080/lana
+
