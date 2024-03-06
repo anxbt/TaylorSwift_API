@@ -1,6 +1,4 @@
 require('dotenv').config();
-require('./helpers/init_mongo')
-const User = require('./Models/User.model')
 
 const cors = require('cors')
 
@@ -11,12 +9,9 @@ app.use(cors({
 }))
 
 const Taylor_relationships = require('./Talylor_Relationship_Data_');
-Lana_relationships = require('./Lana_Realtionship_Data')
+Lana_relationships = require('./Lana_Realtionship_Data').default
 
-//     OR
 
-// const express = require('express');
-// const app = express();
 
 const PORT = process.env.PORT && 8080
 
