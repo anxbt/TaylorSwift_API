@@ -1,3 +1,6 @@
+const serverless = require('serverless-http')
+const Taylor_relationships = require('./Talylor_Relationship_Data_');
+const Lana_relationships = require('./Lana_Realtionship_Data')
 require('dotenv').config();
 
 const cors = require('cors')
@@ -5,13 +8,8 @@ const cors = require('cors')
 const app = require('express')();
 
 app.use(cors({
-    origin: "http://localhost:3001"
+    origin: process.env.CORS_ORIGIN || "*"
 }))
-
-const Taylor_relationships = require('./Talylor_Relationship_Data_');
-Lana_relationships = require('./Lana_Realtionship_Data').default
-
-
 
 const PORT = process.env.PORT && 8080
 
@@ -28,7 +26,9 @@ app.get('/taylor', (req, res) => {
 app.get('/lana', (req, res) => {
     res.send(Lana_relationships)
 })
-    .post('/lana', (req, res) => {
-        // Handle POST request logic here
-        res.send('POST request for /lana');
-    });
+app.post('/lana', (req, res) => {
+    // Handle POST request logic here
+    res.send('POST request for /lana');
+});
+
+module.exports.handler = serverless(app)
