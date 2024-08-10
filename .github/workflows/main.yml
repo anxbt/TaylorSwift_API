@@ -1,0 +1,34 @@
+name: Deploy Lambda Function
+
+on:
+  push:
+    branches:
+      - main  # or the branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # or your desired version
+
+      - name: Install dependencies
+        run: npm install  # or yarn install
+
+      - name: Zip Lambda function
+        run: zip -r function.zip .
+
+      - name: Deploy to AWS Lambda
+        uses: aws-actions/aws-lambda-deploy@v1.0.0
+        with:
+          function-name: TaylorApi
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ap-south-1  # your AWS region
+          zip-file: function.zip
